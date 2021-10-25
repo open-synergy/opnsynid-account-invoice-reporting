@@ -5,14 +5,11 @@
     "name": "Invoice Analysis Group By Product Brand",
     "version": "8.0.1.0.0",
     "category": "Accounting & Finance",
-    "website": "https://opensynergy-indonesia.com/",
-    "author": "OpenSynergy Indonesia",
+    "author": "OpenSynergy Indonesia, PT. Simetri Sinergi Indonesia",
+    "website": "https://simetri-sinergi.id",
     "license": "AGPL-3",
     "installable": True,
-    "depends": [
-        "account",
-        "product_brand"
-    ],
+    "depends": ["account", "product_brand"],
     "data": [
         "views/invoice_report_views.xml",
     ],

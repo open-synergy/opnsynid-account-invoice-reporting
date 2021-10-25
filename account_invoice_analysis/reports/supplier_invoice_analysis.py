@@ -2,8 +2,7 @@
 # Copyright 2019 OpenSynergy Indonesia
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields
-from openerp import tools
+from openerp import fields, models, tools
 
 
 class SupplierInvoiceAnalysis(models.Model):
@@ -67,12 +66,10 @@ class SupplierInvoiceAnalysis(models.Model):
             ("proforma2", "Pro-forma"),
             ("open", "Open"),
             ("paid", "Done"),
-            ("cancel", "Cancelled")
+            ("cancel", "Cancelled"),
         ],
     )
-    date_due = fields.Date(
-        string="Date Due,"
-    )
+    date_due = fields.Date(string="Date Due,")
     account_id = fields.Many2one(
         string="Account",
         comodel_name="account.account",
@@ -182,17 +179,20 @@ class SupplierInvoiceAnalysis(models.Model):
     def init(self, cr):
         tools.drop_view_if_exists(cr, self._table)
         # pylint: disable=locally-disabled, sql-injection
-        cr.execute("""CREATE or REPLACE VIEW %s as (
+        cr.execute(
+            """CREATE or REPLACE VIEW %s as (
             %s
             FROM %s
             %s
             %s
             %s
-        )""" % (
-            self._table,
-            self._select(),
-            self._from(),
-            self._join(),
-            self._where(),
-            self._group_by()
-        ))
+        )"""
+            % (
+                self._table,
+                self._select(),
+                self._from(),
+                self._join(),
+                self._where(),
+                self._group_by(),
+            )
+        )
